@@ -17,23 +17,26 @@ class App extends SingleCommandApplication
         $this
             ->addArgument('inputFilePath', InputArgument::REQUIRED, 'Path to .asm file')
             ->addArgument('outputFilePath', InputArgument::REQUIRED, 'Path to binary file')
-            ->addArgument('memoryLimit', InputArgument::OPTIONAL, 'Path to binary file')
+            ->addArgument('memoryLimit', InputArgument::OPTIONAL, 'PHP memory limit. Unlimited by default')
             ->setCode([$this, 'main']);
         $this->parser = $parser;
     }
 
     public function main(InputInterface $input, OutputInterface $output): void
     {
-        ini_set('memory_limit', $input->getArgument('memoryLimit') ?? -1);
+        try {
+            ini_set('memory_limit', $input->getArgument('memoryLimit') ?? -1);
 
-        $assembledFileContent = $this->parser->parseFile($input->getArgument('inputFilePath'));
+            $assembledFileContent = $this->parser->parseFile($input->getArgument('inputFilePath'));
 
-        $outputFilePath = $input->getArgument('outputFilePath');
-        if (file_put_contents($outputFilePath, $assembledFileContent)) {
-            $output->writeln("File $outputFilePath was successfully built.");
-        } else {
-            $output->writeln("Unable to write to $outputFilePath.");
+            $outputFilePath = $input->getArgument('outputFilePath');
+            if (file_put_contents($outputFilePath, $assembledFileContent)) {
+                $output->writeln("File $outputFilePath was successfully built.");
+            } else {
+                $output->writeln("<fg=red>Unable to write to file $outputFilePath.</>");
+            }
+        } catch (\Exception $e) {
+            $output->writeln('<fg=red>' . $e->getMessage() . '</>');
         }
-
     }
 }
