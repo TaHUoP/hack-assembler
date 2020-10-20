@@ -1,0 +1,23 @@
+{
+  "name": "HACK assembler",
+  "authors": [
+    {
+      "name": "Malkhasian Vazghen",
+      "email": "malhasianv@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "symfony/console": "^5.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "TaHUoP\\": "src/"
+    }
+  },
+  "config": {
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "optimize-autoloader": true
+  }
+}
