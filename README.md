@@ -10,7 +10,7 @@ For guidelines on composer installation visit https://getcomposer.org/download/
 ## Usage
 To compile a file run:
 
-    hackasm <inputFilePath> <outputFilePath>
+    hackasm <inputFilePath> [<outputFilePath>]
 > ! Make sure you have write privileges for the path specified in \<outputFilePath>.
 >
 To get detailed usage manual run:

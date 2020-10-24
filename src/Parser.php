@@ -4,6 +4,9 @@
 namespace TaHUoP;
 
 
+use Exception;
+use InvalidArgumentException;
+
 class Parser
 {
     private const COMMENT_REGEX = '/\/\/.*$/';
@@ -93,6 +96,9 @@ class Parser
 
     public function parseFile(string $filePath): string
     {
+        if(!is_readable($filePath))
+            throw new InvalidArgumentException("Unable to read from $filePath");
+
         $this->symbolsTable = self::DEFAULT_SYMBOLS_TABLE;
 
         $lines = [];
@@ -128,7 +134,7 @@ class Parser
         } elseif (preg_match(self::C_INSTRUCTION_REGEX, $instruction->text, $matches)) {
             return $this->getCInstructionOpcode($matches[1] ?? '', $matches[2], $matches[3] ?? '');
         } else {
-            throw new \Exception("Invalid instruction \"$instruction->text\" on line " . $instruction->getOriginalFileLine() . '.');
+            throw new Exception("Invalid instruction \"$instruction->text\" on line " . $instruction->getOriginalFileLine() . '.');
         }
     }
 
