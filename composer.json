@@ -1,5 +1,5 @@
 {
-  "name": "HACK assembler",
+  "name": "tahuop/hack-assembler",
   "authors": [
     {
       "name": "Malkhasian Vazghen",
@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "TaHUoP\\": "src/"
+      "TaHUoP\\HackAsm\\": "src/"
     }
   },
   "config": {

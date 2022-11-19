@@ -1,9 +1,10 @@
 #!/usr/bin/env php
 <?php
-require __DIR__.'/vendor/autoload.php';
 
-use TaHUoP\App;
-use TaHUoP\Parser;
+use TaHUoP\HackAsm\App;
+use TaHUoP\HackAsm\Parser;
+
+require __DIR__.'/vendor/autoload.php';
 
 (new App(new Parser()))
     ->run();
