@@ -134,7 +134,7 @@ class Parser
         } elseif (preg_match(self::C_INSTRUCTION_REGEX, $instruction->text, $matches)) {
             return $this->getCInstructionOpcode($matches[1] ?? '', $matches[2], $matches[3] ?? '');
         } else {
-            throw new Exception("Invalid instruction \"$instruction->text\" on line " . $instruction->getOriginalFileLine() . '.');
+            throw new Exception("Invalid instruction \"$instruction->text\" on line " . $instruction->originalFileLine . '.');
         }
     }
 

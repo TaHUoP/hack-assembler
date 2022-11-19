@@ -10,9 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class App extends SingleCommandApplication
 {
-    private Parser $parser;
-
-    public function __construct(Parser $parser)
+    public function __construct(private readonly Parser $parser)
     {
         parent::__construct();
         $this
@@ -20,7 +18,6 @@ class App extends SingleCommandApplication
             ->addArgument('outputFilePath', InputArgument::OPTIONAL, 'Path to binary file')
             ->addArgument('memoryLimit', InputArgument::OPTIONAL, 'PHP memory limit. Unlimited by default')
             ->setCode([$this, 'main']);
-        $this->parser = $parser;
     }
 
     public function main(InputInterface $input, OutputInterface $output): void
